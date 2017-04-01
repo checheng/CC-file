@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Tour guide</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loction">位置:</string>
+    <string name="price">价格:</string>
+    <string name="grade">评分:</string>
+    <string name="briefintroduction">简介:</string>
+    <string name="historicalsites">名胜</string>
+    <string name="park">公园</string>
+    <string name="restaurant">餐馆</string>
+    <string name="hotel">旅店</string>
+    <string name="titile">Wuhan Travel Guide</string>
+</resources>
