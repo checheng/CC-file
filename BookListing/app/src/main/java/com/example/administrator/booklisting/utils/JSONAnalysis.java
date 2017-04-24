@@ -27,7 +27,12 @@ public class JSONAnalysis {
 
 			for (int i = 0; i <jsonBooks.length();i++){
 				JSONObject jsonBook = jsonBooks.optJSONObject(i);
-				mBook = new Book(jsonBook.optString("title"),jsonBook.optString("author"),
+				StringBuilder myauthor = new StringBuilder();
+				for (int m = 0;m<jsonBook.optJSONArray("author").length();m++){
+					if (m!=0)myauthor.append("|");
+					myauthor.append(jsonBook.optJSONArray("author").opt(m));
+				}
+				mBook = new Book(jsonBook.optString("title"),myauthor.toString(),
 						jsonBook.optString("summary"),jsonBook.optJSONObject("images").getString("medium"));
 				mBooks.add(mBook);
 			}

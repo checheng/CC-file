@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BookListing</string>
+    <string name="research">查询</string>
+    <string name="hintwords">请输入关键字！</string>
 </resources>
