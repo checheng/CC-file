@@ -18,6 +18,7 @@ public class JSONAnalysis {
 	private Book mBook=  new Book();
 
 	public List<Book> JSONresolution (String jsonString){
+		mBooks.clear();
 		JSONObject jsonObject = null;
 		JSONArray jsonBooks = null;
 

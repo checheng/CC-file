@@ -1,6 +1,7 @@
 package com.example.administrator.booklisting.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.administrator.booklisting.R;
 import com.example.administrator.booklisting.bean.Book;
+import com.example.administrator.booklisting.http.HttpConnectionMethod;
 
 import java.util.List;
 
@@ -61,6 +63,9 @@ public class BookListAdapter extends BaseAdapter{
 			viewHolder.title.setText(mBookList.get(position).getTitle());
 			viewHolder.author.setText(mBookList.get(position).getAuthor());
 			viewHolder.summary.setText(mBookList.get(position).getSummary());
+			HttpConnectionMethod method = new HttpConnectionMethod();
+			Bitmap bitmap = method.myImageBitmap(mBookList.get(position).getImages_medium());
+			viewHolder.images_medium.setImageBitmap(bitmap);
 
 		}catch (Exception e){
 			e.printStackTrace();
