@@ -1,0 +1,24 @@
+#Internal package file, do not edit.
+#Mon Apr 24 16:17:32 CST 2017
+2.base=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_
+5.file=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-xxhdpi-v4\\ic_launcher.png
+5.set=ANDROID_RESOURCE
+3.base=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_
+6.file=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
+2.set=ANDROID_RESOURCE
+4.base=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_
+count=7
+0.file=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\activity_main.xml
+5.base=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_
+4.set=ANDROID_RESOURCE
+6.base=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+1.file=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\menu-v11\\main.xml
+1.set=ANDROID_RESOURCE
+2.file=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\menu\\main.xml
+6.set=DEX
+0.base=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_
+3.file=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_\\AndroidManifest.xml
+3.set=ANDROID_RESOURCE
+1.base=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_
+4.file=G\:\\git_repository\\HttpURLConnection\\app\\build\\intermediates\\res\\resources-debug.ap_\\resources.arsc
+0.set=ANDROID_RESOURCE
