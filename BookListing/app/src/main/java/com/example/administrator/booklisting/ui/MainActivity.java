@@ -16,6 +16,8 @@ import com.example.administrator.booklisting.bean.Book;
 import com.example.administrator.booklisting.http.HttpConnectionMethod;
 import com.example.administrator.booklisting.utils.JSONAnalysis;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import static com.example.administrator.booklisting.http.HttpConnectionMethod.getURLResponse;
@@ -54,7 +56,12 @@ public class MainActivity extends AppCompatActivity {
 					toast.show();
 				} else {
 					StringBuilder  m =new StringBuilder();
-					m.append("https://api.douban.com/v2/book/search?q=").append(research.getText().toString().trim()).append("&count=15");
+					String mm = "123";
+					try {
+						mm = URLEncoder.encode(research.getText().toString().trim(),"utf-8");
+//						Log.w("ssssss",mm);
+					}catch (UnsupportedEncodingException e){e.printStackTrace();}
+					m.append("https://api.douban.com/v2/book/search?q=").append(mm).append("&count=15");
 					new DownImgAsyncTask().execute(m.toString());
 				}
 			}
