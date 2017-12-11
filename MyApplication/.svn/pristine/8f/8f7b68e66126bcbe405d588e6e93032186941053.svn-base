@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Charging Station App</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="map">地图</string>
+    <string name="charging">充电</string>
+    <string name="mine">我的</string>
+    <string name="scan">扫码</string>
+    <string name="reservation">预约</string>
+    <string name="inputSn">输入SN</string>
+    <string name="quit">退出登录</string>
+</resources>

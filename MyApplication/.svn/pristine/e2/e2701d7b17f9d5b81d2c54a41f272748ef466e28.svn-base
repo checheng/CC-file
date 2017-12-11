@@ -1,0 +1,44 @@
+package com.wuxindianqi.administrator.chargingstationapp;
+
+import android.app.Application;
+import android.util.Log;
+
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
+
+/**
+ * Created by Administrator on 2017/11/13.
+ */
+
+public class MyApplicaiton extends Application {
+
+	/**
+	 * baseURL
+	 */
+	public static final String BASE_URL = "http://192.168.2.253:8082/";
+	/**
+	 * API_key
+	 */
+	public static final String ANDROID = "AC5870E67EB327C48049DC86690F3A63";
+	public static final String IOS = "8FA6683037EB216F2583FE8FEDCB6D30";
+	public static final String WECHAT = "3FF30277D14419595E7A7AA9AE6114FA";
+
+	public static final String API_KEY = "a59f7076646c4667aa0e6a387891db9a";
+
+	public static String API_TOKEN ;
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+
+		ZXingLibrary.initDisplayOpinion(this);
+	}
+
+	public static String getApiToken() {
+		return API_TOKEN;
+	}
+
+	public static void setApiToken(String apiToken) {
+		Log.i("传入Token值",apiToken);
+		API_TOKEN = apiToken;
+	}
+}

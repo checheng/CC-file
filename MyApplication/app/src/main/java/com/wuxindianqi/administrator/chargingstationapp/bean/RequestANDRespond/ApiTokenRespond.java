@@ -1,0 +1,55 @@
+package com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond;
+
+/**
+ * Created by Administrator on 2017/11/9.
+ */
+
+public class ApiTokenRespond {
+
+
+
+	private String msg;
+
+	private String data;
+
+	private int status;
+
+	/**
+	 *  1 API_KEY_ERROR apikey 错误
+	 *  0 SUCCESS 获取成功
+	 * */
+
+	public static final int API_KEY_ERROR = 1,
+			SUCCESS = 0;
+
+	/*public ApiTokenRespond(int status, String msg, String data) {
+		this.status = status;
+		this.msg = msg;
+		this.data = data;
+	}*/
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+}

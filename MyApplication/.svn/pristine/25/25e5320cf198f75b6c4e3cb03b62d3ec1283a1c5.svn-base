@@ -1,0 +1,22 @@
+package com.wuxindianqi.administrator.chargingstationapp.utils;
+
+import com.wuxindianqi.administrator.chargingstationapp.bean.ModifyUserINFORespond;
+
+import retrofit2.Call;
+import retrofit2.http.Header;
+import retrofit2.http.PATCH;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+
+/**
+ * Created by Administrator on 2017/11/17.
+ */
+
+public interface ModifyUser_Interface {
+	@PATCH("v1/user/{token}/info?")
+	Call<ModifyUserINFORespond> getRespond(@Path("token") String token ,
+										   @Query("nickname") String nickname,
+										   @Query("email") String email,
+										   @Query("sex") int sex,
+										   @Header("Authorization") String authorization);
+}

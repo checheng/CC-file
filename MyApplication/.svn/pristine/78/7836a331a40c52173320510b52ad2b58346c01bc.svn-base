@@ -1,0 +1,18 @@
+package com.wuxindianqi.administrator.chargingstationapp.utils;
+
+import com.wuxindianqi.administrator.chargingstationapp.bean.Logout;
+
+import retrofit2.Call;
+import retrofit2.http.DELETE;
+import retrofit2.http.Header;
+
+/**
+ * Created by Administrator on 2017/11/16.
+ */
+
+public interface Quit_Interface {
+
+	@DELETE("v1/user/session")
+	Call<Logout> getResond( @Header("Authorization") String authorization);
+
+}

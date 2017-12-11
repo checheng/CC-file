@@ -1,0 +1,21 @@
+package com.wuxindianqi.administrator.chargingstationapp.utils;
+
+import com.wuxindianqi.administrator.chargingstationapp.MyApplicaiton;
+import com.wuxindianqi.administrator.chargingstationapp.bean.ApiTokenRespond;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+
+/**
+ * Created by Administrator on 2017/11/14.
+ */
+
+public interface GetToken_Interface {
+
+	@GET("v1/api_token?apiKey="+ MyApplicaiton.API_KEY)
+	Call<ApiTokenRespond> getCall(
+
+			@Header("Authorization") String authorization);
+
+}

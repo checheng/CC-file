@@ -1,0 +1,92 @@
+package com.wuxindianqi.administrator.chargingstationapp.view;
+
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.wuxindianqi.administrator.chargingstationapp.R;
+import com.wuxindianqi.administrator.chargingstationapp.adapter.MyRecyclerViewAdapter;
+import com.wuxindianqi.administrator.chargingstationapp.bean.ViewItem;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class InformationFragment extends Fragment {
+
+	private RecyclerView mRecyclerView;
+	private List<ViewItem> mItems = new ArrayList<ViewItem>();
+
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+							 Bundle savedInstanceState) {
+		// Inflate the layout for this fragment
+		return inflater.inflate(R.layout.fragment_information, container, false);
+	}
+
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		initView();
+
+	}
+
+	public void initView (){
+		mRecyclerView = (RecyclerView)getView().findViewById(R.id.my_recyclerview);
+		setTitle();
+		MyRecyclerViewAdapter myRecyclerViewAdapter = new MyRecyclerViewAdapter(mItems);
+		myRecyclerViewAdapter.setOnItemClickLitener(new MyRecyclerViewAdapter.OnItemClickLitener() {
+			@Override
+			public void onItemClick(View view, int position) {
+//				Toast.makeText(getActivity(), position + " click",
+//						Toast.LENGTH_SHORT).show();
+				switch (position) {
+					case 0://个人设置
+
+						break;
+					case 1:
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					case 4:
+						break;
+					case 5:
+						break;
+					default:
+						break;
+				}
+			}
+		});
+		mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+		mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+		mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+
+		mRecyclerView.setAdapter(myRecyclerViewAdapter);
+	}
+
+	public void setTitle(){
+		ViewItem []itemList = new ViewItem[6];
+	    itemList[0] = new ViewItem("个人设置",0);
+		itemList[1] = new ViewItem("我的余额",0);
+		itemList[2] = new ViewItem("消费记录",0);
+		itemList[3] = new ViewItem("申请建桩",0);
+		itemList[4] = new ViewItem("建桩共享",0);
+		itemList[5] = new ViewItem("关于",0);
+		for (int i = 0;i<6;i++){
+			mItems.add(itemList[i]);
+		}
+	}
+}

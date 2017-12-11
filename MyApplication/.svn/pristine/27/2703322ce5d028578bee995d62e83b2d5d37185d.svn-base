@@ -1,0 +1,21 @@
+package com.wuxindianqi.administrator.chargingstationapp.bean;
+
+/**
+ * Created by Administrator on 2017/11/9.
+ */
+
+public class SendSMSVerifyCode {
+	private String mobile;
+
+	public SendSMSVerifyCode(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+}

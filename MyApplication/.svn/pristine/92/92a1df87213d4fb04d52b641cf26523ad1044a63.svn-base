@@ -1,0 +1,19 @@
+package com.wuxindianqi.administrator.chargingstationapp.utils;
+
+import com.wuxindianqi.administrator.chargingstationapp.bean.SendSMSVerifyCodeRespond;
+
+import retrofit2.Call;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
+
+/**
+ * Created by Administrator on 2017/11/15.
+ */
+
+public interface SendSMSVerifyCod_Interface {
+
+	@POST("v1/user/verify_code?")
+	Call<SendSMSVerifyCodeRespond> getRespond(@Query("mobile") String mobile,
+											  @Header("Authorization") String authorization);
+}

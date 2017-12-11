@@ -1,0 +1,163 @@
+package com.wuxindianqi.administrator.chargingstationapp.view;
+
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.LocationSource;
+import com.amap.api.maps.TextureMapView;
+import com.amap.api.maps.model.MyLocationStyle;
+import com.wuxindianqi.administrator.chargingstationapp.R;
+
+import java.lang.reflect.Field;
+
+
+/**
+ *
+ */
+public abstract class BaseMapFragment extends PermissionFragment implements LocationSource,AMapLocationListener {
+
+	private TextureMapView mTextureMapView;
+	private AMap mAMap;
+	private MyLocationStyle myLocationStyle;
+	private OnLocationChangedListener mListener;
+	private AMapLocationClient locationClient;
+	private AMapLocationClientOption clientOption;
+
+
+	public BaseMapFragment() {
+		// Required empty public constructor
+	}
+
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+							 Bundle savedInstanceState) {
+		// Inflate the layout for this fragment
+		return inflater.inflate(R.layout.fragment_base, container, false);
+	}
+
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		mTextureMapView = (TextureMapView)getView().findViewById(R.id.map);
+
+		if (mTextureMapView!=null){
+			mTextureMapView.onCreate(savedInstanceState);
+			if (mAMap == null) {
+				mAMap = mTextureMapView.getMap();
+
+				setUpMap();
+			}else {
+				mAMap.clear();
+				mAMap.setLocationSource(this);
+				mAMap.setMyLocationEnabled(true);
+				mAMap = mTextureMapView.getMap();
+				setUpMap();
+			}
+
+		}
+	}
+
+	/**
+	 * 设置一些amap的属性
+	 */
+	private void setUpMap() {
+		mAMap.setLocationSource(this);// 设置定位监听
+		mAMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
+		mAMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+		mAMap.setMyLocationStyle(new MyLocationStyle());//初始化定位蓝点样式类
+		mAMap.setMapType(AMap.MAP_TYPE_NORMAL);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		mTextureMapView.onResume();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		mTextureMapView.onPause();
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		mTextureMapView.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		mTextureMapView.onDestroy();
+		if (locationClient!=null) locationClient.onDestroy();
+	}
+
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		try {
+			Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+			childFragmentManager.setAccessible(true);
+			childFragmentManager.set(this, null);
+		} catch (NoSuchFieldException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public void activate(OnLocationChangedListener onLocationChangedListener) {
+		mListener = onLocationChangedListener;
+		if (locationClient == null){
+			locationClient = new AMapLocationClient(getActivity());
+			clientOption = new AMapLocationClientOption();
+			locationClient.setLocationListener(this);
+			clientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+//			clientOption.setOnceLocation(true);
+			locationClient.setLocationOption(clientOption);
+			locationClient.startLocation();
+		}
+	}
+
+	@Override
+	public void deactivate() {
+		mListener = null;
+		if (locationClient != null) {
+			locationClient.stopLocation();
+			locationClient.onDestroy();
+		}
+		locationClient = null;
+
+	}
+
+	@Override
+	public void onLocationChanged(AMapLocation aMapLocation) {
+		if (mListener !=null&&aMapLocation !=null){
+			if (aMapLocation != null &&aMapLocation.getErrorCode() == 0) {
+				mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
+			} else {
+				String errText = "定位失败," + aMapLocation.getErrorCode()+ ": " + aMapLocation.getErrorInfo();
+				Log.e("定位报错：",errText);
+			}
+		}
+	}
+}

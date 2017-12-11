@@ -1,0 +1,348 @@
+package com.wuxindianqi.administrator.chargingstationapp;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
+import com.wuxindianqi.administrator.chargingstationapp.bean.ApiTokenRespond;
+import com.wuxindianqi.administrator.chargingstationapp.bean.GetUserINFO;
+import com.wuxindianqi.administrator.chargingstationapp.bean.LoginRespond;
+import com.wuxindianqi.administrator.chargingstationapp.bean.Logout;
+import com.wuxindianqi.administrator.chargingstationapp.bean.ModifyUserINFORespond;
+import com.wuxindianqi.administrator.chargingstationapp.bean.Register;
+import com.wuxindianqi.administrator.chargingstationapp.bean.RegisterRespond;
+import com.wuxindianqi.administrator.chargingstationapp.bean.SendSMSVerifyCodeRespond;
+import com.wuxindianqi.administrator.chargingstationapp.utils.Cookies.CookieManger;
+import com.wuxindianqi.administrator.chargingstationapp.utils.GetToken_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.GetUser_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.Login_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.ModifyUser_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.Quit_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.Register_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.SendSMSVerifyCod_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.view.ChargingFragment;
+import com.wuxindianqi.administrator.chargingstationapp.view.InformationFragment;
+import com.wuxindianqi.administrator.chargingstationapp.view.MapFragmentMap;
+
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.wuxindianqi.administrator.chargingstationapp.MyApplicaiton.ANDROID;
+import static com.wuxindianqi.administrator.chargingstationapp.MyApplicaiton.BASE_URL;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+	private MapFragmentMap mMapFragment;
+	private InformationFragment mInformationFragment;
+	private ChargingFragment mChargingFragment;
+	private Button btnMap;
+	private Button btnCharging;
+	private Button btnINFO;
+
+	private FragmentTransaction mFragmentTransaction;
+	private FragmentManager mFragmentManager;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main );
+		initview();
+		initFragment();
+//		if (MyApplicaiton.getApiToken() == null) {
+//			request();
+//		}
+//		requestRegister();
+//		requestPHONE();
+		requestLogin();
+//		requestOUT();
+//		requestUserInfo();
+	}
+
+	//fortest
+	private boolean AA = true;
+	private String theToken;
+
+	private void initview() {
+		btnMap = (Button) findViewById(R.id.btn_main_one);
+		btnMap.setOnClickListener(this);
+		btnCharging = (Button) findViewById(R.id.btn_main_two);
+		btnCharging.setOnClickListener(this);
+		btnINFO = (Button) findViewById(R.id.btn_main_three);
+		btnINFO.setOnClickListener(this);
+	}
+
+	private void initFragment() {
+		mMapFragment = new MapFragmentMap();
+		mChargingFragment = new ChargingFragment();
+		mInformationFragment = new InformationFragment();
+		mFragmentManager = getSupportFragmentManager();
+		mFragmentTransaction = mFragmentManager.beginTransaction();
+		mFragmentTransaction.add(R.id.fl_main,mMapFragment,mMapFragment.getClass().getName());
+		mFragmentTransaction.commit();
+	}
+
+
+	private void repliceFragment (Fragment fragment){
+		mFragmentTransaction = mFragmentManager.beginTransaction();
+		mFragmentTransaction.setCustomAnimations(R.anim.slide_in_bottom,R.anim.slide_out_bottom);
+		mFragmentTransaction.replace(R.id.fl_main,fragment,fragment.getClass().getName());
+		mFragmentTransaction.addToBackStack(null);
+		mFragmentTransaction.commit();
+	}
+
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.btn_main_one:
+				repliceFragment(mMapFragment);
+				break;
+			case R.id.btn_main_two:
+				repliceFragment(mChargingFragment);
+				break;
+			case R.id.btn_main_three:
+				repliceFragment(mInformationFragment);
+				break;
+		}
+	}
+
+	public void  request(){
+
+		Retrofit retrofit = new Retrofit.
+				Builder().
+				baseUrl(BASE_URL).
+				client(OkHttpC()).
+				addConverterFactory(GsonConverterFactory.create()).
+				build();
+
+		GetToken_Interface getTokenInterface = retrofit.create(GetToken_Interface.class);
+
+		Call<ApiTokenRespond> call = getTokenInterface.getCall(ANDROID);
+
+		call.enqueue(new Callback<ApiTokenRespond>() {
+			@Override
+			public void onResponse(Call<ApiTokenRespond> call, Response<ApiTokenRespond> response) {
+				try {
+					if (response.body().getData() != null) ;
+					{
+						MyApplicaiton.setApiToken(response.body().getData());
+					}
+					Log.i("返回信息:", response.toString() + "   //      " + response.body().getMsg() + "   //      " + response.body().getData());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(Call<ApiTokenRespond> call, Throwable t) {
+				Log.i("错误信息:",t.toString());
+			}
+		});
+	}
+
+	public void  requestRegister(){
+		//测试例子
+		Register register = new Register("15327218886","123456","370247","WHWX");
+
+		Retrofit retrofit = new Retrofit.
+				Builder().
+				baseUrl(BASE_URL).
+				addConverterFactory(GsonConverterFactory.create()).
+				build();
+
+		Register_Interface getRegisterUser = retrofit.create(Register_Interface.class);
+
+//		Call<RegisterRespond> call = getRegisterUser.getRespond();
+
+		Call<RegisterRespond> call = getRegisterUser.getRespond(
+				register.getMobile(),
+				register.getPassword(),
+				register.getVerifyCode(),
+				register.getPlatformCompanyCode(),MyApplicaiton.ANDROID);
+
+		call.enqueue(new Callback<RegisterRespond>() {
+			@Override
+			public void onResponse(Call<RegisterRespond> call, Response<RegisterRespond> response) {
+				try {
+					Log.i("返回信息:", response.message());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(Call<RegisterRespond> call, Throwable t) {
+				Log.i("错误信息:",t.toString());
+			}
+		});
+
+
+	}
+
+	public void  requestPHONE(){
+		Retrofit retrofit = new Retrofit.Builder().
+				baseUrl(BASE_URL).
+				addConverterFactory(GsonConverterFactory.create()).
+				build();
+
+		SendSMSVerifyCod_Interface getPHONE = retrofit.create(SendSMSVerifyCod_Interface.class);
+
+		Call<SendSMSVerifyCodeRespond> call = getPHONE.getRespond("15327218886",ANDROID);
+
+		call.enqueue(new Callback<SendSMSVerifyCodeRespond>() {
+			@Override
+			public void onResponse(Call<SendSMSVerifyCodeRespond> call, Response<SendSMSVerifyCodeRespond> response) {
+				try {
+					Log.i("返回信息:", response.toString());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(Call<SendSMSVerifyCodeRespond> call, Throwable t) {
+				Log.i("错误信息:",t.toString());
+			}
+		});
+
+	}
+
+
+	public void requestLogin() {
+		Retrofit retrofit = new Retrofit.
+				Builder().
+				baseUrl(BASE_URL).
+				client(OkHttpC()).
+				addConverterFactory(GsonConverterFactory.create()).
+				build();
+
+		Login_Interface getLogin = retrofit.create(Login_Interface.class);
+
+		Call<LoginRespond> call  = getLogin.getRespond("15327218886","123456",ANDROID);
+
+		call.enqueue(new Callback<LoginRespond>() {
+			@Override
+			public void onResponse(Call<LoginRespond> call, Response<LoginRespond> response) {
+				try {
+					Log.i("返回信息:", response.toString()+ "/     /"+ response.body().getData().getToken()+ "/        /"+ response.body().getMsg());
+					if (response.body().getStatus()==0){
+						theToken = response.body().getData().getToken();
+						requestUserInfo(theToken);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(Call<LoginRespond> call, Throwable t) {
+				Log.i("错误信息:",t.toString());
+			}
+		});
+
+	}
+
+	public void requestOUT (){
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+
+		Quit_Interface getCall = retrofit.create( Quit_Interface.class);
+
+		Call<Logout> call = getCall.getResond(ANDROID);
+
+		call.enqueue(new Callback<Logout>() {
+			@Override
+			public void onResponse(Call<Logout> call, Response<Logout> response) {
+				Log.i("返回信息:", response.toString()+ "/     /" + response.body().getStatus());
+			}
+
+			@Override
+			public void onFailure(Call<Logout> call, Throwable t) {
+				Log.i("错误信息:",t.toString());
+			}
+		});
+	}
+
+
+	public void requestUserInfo (String TOKEN){
+		Retrofit retrofit = new Retrofit.Builder().
+				baseUrl(BASE_URL).
+				client(OkHttpC()).
+				addConverterFactory(GsonConverterFactory.create()).
+				build();
+
+		GetUser_Interface getCall  = retrofit.create(GetUser_Interface.class);
+
+		Call<GetUserINFO> call  = getCall.getResopnd(TOKEN,ANDROID);
+
+		call.enqueue(new Callback<GetUserINFO>() {
+			@Override
+			public void onResponse(Call<GetUserINFO> call, Response<GetUserINFO> response) {
+				Log.i("返回信息:", response.toString()+ "/     /" + response.body().getStatus()+ "/     /" +response.body().getUserInfo().getRegisterDate()  );
+				if (AA){
+					AA=false;
+					requestModifyUser(theToken);
+				} else
+					Log.i("返回信息:",response.body().getUserInfo().getNickname() );
+			}
+
+			@Override
+			public void onFailure(Call<GetUserINFO> call, Throwable t) {
+				Log.i("错误信息:",t.toString());
+			}
+		});
+
+	}
+
+
+
+	public  void requestModifyUser(String token){
+		Retrofit retrofit = new Retrofit.Builder().
+				baseUrl(BASE_URL).
+				client(OkHttpC()).
+				addConverterFactory(GsonConverterFactory.create()).
+				build();
+
+		ModifyUser_Interface getCall = retrofit.create(ModifyUser_Interface.class);
+
+		Call<ModifyUserINFORespond> call = getCall.getRespond(token,"CC","14405103@qq.com",1,ANDROID);
+
+		call.enqueue(new Callback<ModifyUserINFORespond>() {
+			@Override
+			public void onResponse(Call<ModifyUserINFORespond> call, Response<ModifyUserINFORespond> response) {
+				Log.i("返回信息:", response.toString()+ "/     /" + response.body().getStatus()+ "/     /" );
+				if (response.body().getStatus()==0){
+					requestUserInfo(theToken);
+				}
+			}
+
+			@Override
+			public void onFailure(Call<ModifyUserINFORespond> call, Throwable t) {
+				Log.i("错误信息:",t.toString());
+			}
+		});
+
+	}
+	public OkHttpClient OkHttpC(){
+
+		OkHttpClient.Builder builder = new OkHttpClient.Builder().cookieJar(new CookieManger(this));
+
+		OkHttpClient okHttpClient = new OkHttpClient.Builder()
+				.cookieJar(new CookieManger(this))
+				.connectTimeout(5000, TimeUnit.SECONDS)
+				.build();
+		return okHttpClient;
+	}
+
+
+}

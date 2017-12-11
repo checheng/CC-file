@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="AndroidPicker-1.1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/42a9a7aaed88960bf5f8fdecbfa16e50da9e36a6/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/42a9a7aaed88960bf5f8fdecbfa16e50da9e36a6/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.qqtheme.framework/AndroidPicker/1.1.0/6e9372f0620c6c2703a79a7ed1b44bc0ed3215fe/AndroidPicker-1.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

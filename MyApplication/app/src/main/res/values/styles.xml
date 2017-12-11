@@ -1,0 +1,69 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="button_mainlayout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="map_button">
+        <item name="android:background">#00000000</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="Transparent_button">
+        <item name="android:background">#00000000</item>
+        <item name="android:textColor">@color/base_color</item>
+    </style>
+    <style name="Button_background_blue">
+        <item name="android:background">@drawable/selector_btn_bg_blue_white</item>
+        <item name="android:textColor">@drawable/selector_btn_text_white_blue</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="Button_background_title">
+        <item name="android:background">@color/empty</item>
+        <item name="android:textColor">@drawable/selector_btn_text_white_blue</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="Button_background_white">
+        <item name="android:background">@drawable/selector_btn_bg_white_bule</item>
+        <item name="android:textColor">@drawable/selector_btn_text_blue_white</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="SwitchCompat.Text" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">9dp</item>
+    </style>
+    <style name="SwitchCompat.Control" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/lightpink</item>
+        <item name="colorSwitchThumbNormal">@color/lightblue</item>
+        <item name="android:colorForeground">@color/lightblue</item>
+    </style>
+    <style name="Text_black">
+        <item name="android:textColor">@color/base_color</item>
+    </style>
+    <style name="Input_EditText_Configuration">
+        <item name="android:textColor">@color/base_color</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:textCursorDrawable">@drawable/edit_cursor_color</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+</resources>

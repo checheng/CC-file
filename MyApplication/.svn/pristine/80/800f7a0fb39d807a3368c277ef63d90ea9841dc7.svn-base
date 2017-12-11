@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Charging Station App</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="map">地图</string>
+    <string name="charging">充电</string>
+    <string name="mine">我的</string>
+    <string name="scan">扫码</string>
+    <string name="reservation">预约</string>
+    <string name="inputSn">输入SN</string>
+    <string name="quit">退出登录</string>
+    <string name="mybalance">我的余额</string>
+    <string name="back">返回</string>
+    <string name="finished">完成</string>
+    <string name="personalsettings">个人设置</string>
+    <string name="nickname">昵称</string>
+    <string name="inputnickname">请输入昵称。</string>
+    <string name="sex">性别</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="phone">手机</string>
+    <string name="email">邮箱</string>
+    <string name="inputemail">请输入邮箱。</string>
+    <string name="modifypassword">修改登录密码</string>
+    <string name="recharge">充值</string>
+</resources>
