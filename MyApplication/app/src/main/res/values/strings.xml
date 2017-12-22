@@ -73,4 +73,12 @@
     <string name="list">列表</string>
     <string name="testpassword">123456</string>
     <string name="left_mark">＞</string>
+    <string name="location">位置</string>
+    <string name="_000_000km">000.000km</string>
+    <string name="wuxin_address">湖北神武汉市黄陂区武湖工业园立山路一号武汉武新电气科技股份有限公司</string>
+    <string name="ACslow">交流慢冲</string>
+    <string name="ACfast">交流快充</string>
+    <string name="navigate">导航</string>
+    <string name="collection">收藏</string>
+    <string name="name">名称</string>
 </resources>

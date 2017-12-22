@@ -35,4 +35,7 @@ public class URLPath {
 	//v1/app_user/password
 	public static final String FOPGET_PASSWORD = "v1/app_user/password";
 
+	//GET /app_user/station/list
+	public static final String GET_STATION = "v1/app_user/station/list";
+
 }

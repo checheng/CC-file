@@ -1,4 +1,4 @@
-package com.wuxindianqi.administrator.chargingstationapp.bean;
+package com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond;
 
 /**
  * Created by Administrator on 2017/11/9.

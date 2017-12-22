@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.percent.PercentRelativeLayout
+        android:padding="10dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/whitesmoke">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0.3dp"
+            android:background="@color/gainsboro"
+            app:layout_marginTopPercent="80%"
+            app:layout_widthPercent="100%" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0.3dp"
+            android:background="@color/gainsboro"
+            app:layout_marginTopPercent="99%"
+            app:layout_widthPercent="100%" />
+        <TextView
+            android:layout_width="0.3dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/gainsboro"
+            app:layout_heightPercent="12%"
+            app:layout_marginTopPercent="84%" />
+
+
+        <TextView
+            android:id="@+id/loation_name"
+            style="@style/text_for_popupwindow"
+            android:gravity="center_vertical"
+            android:text="@string/name"
+            android:textSize="20sp"
+            app:layout_heightPercent="22.5%"
+            app:layout_marginLeftPercent="5%"
+            app:layout_widthPercent="100%" />
+
+        <TextView
+            android:id="@+id/distance_for_loation"
+            style="@style/text_for_popupwindow"
+            android:gravity="center"
+            android:text="@string/_000_000km"
+            android:textSize="16sp"
+            app:layout_heightPercent="22.5%"
+            app:layout_marginTopPercent="22.5%"
+            app:layout_widthPercent="30%" />
+
+        <TextView
+            android:id="@+id/address_for_location"
+            style="@style/text_for_popupwindow"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/wuxin_address"
+            android:textSize="16sp"
+            app:layout_heightPercent="22.5%"
+            app:layout_marginLeftPercent="30%"
+            app:layout_marginTopPercent="22.5%"
+            app:layout_widthPercent="70%" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_heightPercent="20%"
+            app:layout_marginLeftPercent="5%"
+            app:layout_marginRightPercent="5%"
+            app:layout_marginTopPercent="52.5%"
+            app:layout_widthPercent="100%">
+
+            <Button
+                android:id="@+id/AC_slow_button"
+                style="@style/Button_background_white"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".99"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="@string/ACslow"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".01"
+                android:background="@color/gainsboro" />
+
+            <Button
+                android:id="@+id/AC_fast_button"
+                style="@style/Button_background_white"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".99"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="@string/ACfast"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".01"
+                android:background="@color/gainsboro" />
+
+            <Button
+                android:id="@+id/DC_fast_button"
+                style="@style/Button_background_white"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".99"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="@string/ACfast"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/navigate_button"
+            android:background="#00000000"
+            android:textColor="@drawable/selector_btn_text_blue_white"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="@string/navigate"
+            android:textSize="16sp"
+            app:layout_heightPercent="19%"
+            app:layout_marginLeftPercent="5%"
+            app:layout_marginTopPercent="80%"
+            app:layout_widthPercent="44%" />
+
+        <Button
+            android:id="@+id/collection_button"
+            android:background="#00000000"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="@string/collection"
+            android:textColor="@drawable/selector_btn_text_orange"
+            android:textSize="16sp"
+            app:layout_heightPercent="19%"
+            app:layout_marginRightPercent="5%"
+            app:layout_marginTopPercent="80%"
+            app:layout_widthPercent="44%" />
+
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

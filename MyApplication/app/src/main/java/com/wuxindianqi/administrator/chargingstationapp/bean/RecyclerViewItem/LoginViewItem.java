@@ -1,14 +1,14 @@
-package com.wuxindianqi.administrator.chargingstationapp.bean;
+package com.wuxindianqi.administrator.chargingstationapp.bean.RecyclerViewItem;
 
 /**
  * Created by Administrator on 2017/11/27.
  */
 
-public class ViewItem {
+public class LoginViewItem {
 	private String title;
 	private int resId;
 
-	public ViewItem(String title, int resId) {
+	public LoginViewItem(String title, int resId) {
 		this.title = title;
 		this.resId = resId;
 	}

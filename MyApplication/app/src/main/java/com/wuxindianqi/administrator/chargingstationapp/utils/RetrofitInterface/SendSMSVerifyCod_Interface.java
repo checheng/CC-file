@@ -1,4 +1,4 @@
-package com.wuxindianqi.administrator.chargingstationapp.utils;
+package com.wuxindianqi.administrator.chargingstationapp.utils.RetrofitInterface;
 
 import com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond.SendSMSVerifyCodeRespond;
 

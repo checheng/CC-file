@@ -4,7 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
-import com.wuxindianqi.administrator.chargingstationapp.bean.UserInfo;
+import com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond.UserInfo;
 import com.wuxindianqi.administrator.chargingstationapp.utils.SharedUtils;
 
 /**

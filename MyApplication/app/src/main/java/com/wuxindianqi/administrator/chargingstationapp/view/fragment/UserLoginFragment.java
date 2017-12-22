@@ -18,10 +18,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.wuxindianqi.administrator.chargingstationapp.R;
-import com.wuxindianqi.administrator.chargingstationapp.adapter.MyRecyclerViewAdapter;
+import com.wuxindianqi.administrator.chargingstationapp.adapter.LgoinRecyclerViewAdapter;
 import com.wuxindianqi.administrator.chargingstationapp.bean.EventBus.MessageEvent;
 import com.wuxindianqi.administrator.chargingstationapp.bean.EventBus.MessageQuit;
-import com.wuxindianqi.administrator.chargingstationapp.bean.ViewItem;
+import com.wuxindianqi.administrator.chargingstationapp.bean.RecyclerViewItem.LoginViewItem;
 import com.wuxindianqi.administrator.chargingstationapp.view.activity.BalanceActivity;
 import com.wuxindianqi.administrator.chargingstationapp.view.activity.ConsumptionRecordActivity;
 import com.wuxindianqi.administrator.chargingstationapp.view.activity.GuanyuActivity;
@@ -41,7 +41,7 @@ public class UserLoginFragment extends Fragment {
 
 	private Button QuitUser;
 	private RecyclerView mRecyclerView;
-	private List<ViewItem> mItems = new ArrayList<ViewItem>();
+	private List<LoginViewItem> mItems = new ArrayList<LoginViewItem>();
 
 
 	@Override
@@ -68,8 +68,8 @@ public class UserLoginFragment extends Fragment {
 		});
 		mRecyclerView = (RecyclerView)getView().findViewById(R.id.my_recyclerview);
 		setTitle();
-		MyRecyclerViewAdapter myRecyclerViewAdapter = new MyRecyclerViewAdapter(mItems);
-		myRecyclerViewAdapter.setOnItemClickLitener(new MyRecyclerViewAdapter.OnItemClickLitener() {
+		LgoinRecyclerViewAdapter lgoinRecyclerViewAdapter = new LgoinRecyclerViewAdapter(mItems);
+		lgoinRecyclerViewAdapter.setOnItemClickLitener(new LgoinRecyclerViewAdapter.OnItemClickLitener() {
 			@Override
 			public void onItemClick(View view, int position) {
 //				Toast.makeText(getActivity(), position + " click",
@@ -102,18 +102,17 @@ public class UserLoginFragment extends Fragment {
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 		mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
-
-		mRecyclerView.setAdapter(myRecyclerViewAdapter);
+		mRecyclerView.setAdapter(lgoinRecyclerViewAdapter);
 	}
 
 	public void setTitle(){
-		ViewItem []itemList = new ViewItem[6];
-	    itemList[0] = new ViewItem("个人设置",0);
-		itemList[1] = new ViewItem("我的余额",0);
-		itemList[2] = new ViewItem("消费记录",0);
-		itemList[3] = new ViewItem("申请建桩",0);
-		itemList[4] = new ViewItem("建桩共享",0);
-		itemList[5] = new ViewItem("关于",0);
+		LoginViewItem[]itemList = new LoginViewItem[6];
+	    itemList[0] = new LoginViewItem("个人设置",0);
+		itemList[1] = new LoginViewItem("我的余额",0);
+		itemList[2] = new LoginViewItem("消费记录",0);
+		itemList[3] = new LoginViewItem("申请建桩",0);
+		itemList[4] = new LoginViewItem("建桩共享",0);
+		itemList[5] = new LoginViewItem("关于",0);
 		for (int i = 0;i<6;i++){
 			mItems.add(itemList[i]);
 		}

@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wuxindianqi.administrator.chargingstationapp.R;
-import com.wuxindianqi.administrator.chargingstationapp.bean.ViewItem;
+import com.wuxindianqi.administrator.chargingstationapp.bean.RecyclerViewItem.LoginViewItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +15,19 @@ import java.util.List;
  * Created by Administrator on 2017/11/27.
  */
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHoler> {
+public class LgoinRecyclerViewAdapter extends RecyclerView.Adapter<LgoinRecyclerViewAdapter.ViewHoler> {
 
-	List<ViewItem> mList = new ArrayList<ViewItem>();
+	List<LoginViewItem> mList = new ArrayList<LoginViewItem>();
 	private View mView;
 
-	public MyRecyclerViewAdapter(List<ViewItem> list) {
+	public LgoinRecyclerViewAdapter(List<LoginViewItem> list) {
 		mList = list;
 	}
 
 	@Override
 	public ViewHoler onCreateViewHolder(ViewGroup parent, int viewType) {
 
-		mView = View.inflate(parent.getContext()  ,R.layout.item_view,null);
+		mView = View.inflate(parent.getContext()  ,R.layout.item_view_longin,null);
 		final ViewHoler viewHoler  = new ViewHoler(mView);
 
 //		//item设置监听
@@ -68,7 +68,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
 	@Override
 	public void onBindViewHolder(final ViewHoler holder, int position) {
-		ViewItem item = mList.get(position);
+		LoginViewItem item = mList.get(position);
 		//设置内容
 		holder.text.setText(item.getTitle());
 

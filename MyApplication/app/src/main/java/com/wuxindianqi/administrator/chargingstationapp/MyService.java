@@ -5,10 +5,12 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.wuxindianqi.administrator.chargingstationapp.bean.EventBus.MessageForget;
+import com.wuxindianqi.administrator.chargingstationapp.bean.EventBus.MessageStationList;
 import com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond.ApiTokenRespond;
 import com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond.BalanceRespond;
 import com.wuxindianqi.administrator.chargingstationapp.bean.EventBus.MessageBalance;
@@ -26,16 +28,18 @@ import com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond.M
 import com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond.QuitRespond;
 import com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond.RegisterRespond;
 import com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond.SendSMSVerifyCodeRespond;
-import com.wuxindianqi.administrator.chargingstationapp.utils.Balance_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond.StationList;
+import com.wuxindianqi.administrator.chargingstationapp.utils.RetrofitInterface.Balance_Interface;
 import com.wuxindianqi.administrator.chargingstationapp.utils.Cookies.CookieManger;
-import com.wuxindianqi.administrator.chargingstationapp.utils.ForgetPW_Interface;
-import com.wuxindianqi.administrator.chargingstationapp.utils.GetToken_Interface;
-import com.wuxindianqi.administrator.chargingstationapp.utils.Login_Interface;
-import com.wuxindianqi.administrator.chargingstationapp.utils.ModifyPassword_Interface;
-import com.wuxindianqi.administrator.chargingstationapp.utils.ModifyUser_Interface;
-import com.wuxindianqi.administrator.chargingstationapp.utils.Quit_Interface;
-import com.wuxindianqi.administrator.chargingstationapp.utils.Register_Interface;
-import com.wuxindianqi.administrator.chargingstationapp.utils.SendSMSVerifyCod_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.RetrofitInterface.ForgetPW_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.RetrofitInterface.GetToken_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.RetrofitInterface.Login_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.RetrofitInterface.ModifyPassword_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.RetrofitInterface.ModifyUser_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.RetrofitInterface.Quit_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.RetrofitInterface.Register_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.RetrofitInterface.SendSMSVerifyCod_Interface;
+import com.wuxindianqi.administrator.chargingstationapp.utils.RetrofitInterface.StationList_interface;
 import com.wuxindianqi.administrator.chargingstationapp.utils.SharedUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -490,6 +494,44 @@ public class MyService extends Service {
 				}
 			});
 		}
+	}
+
+	//请求电站list
+	@Subscribe(threadMode = ThreadMode.ASYNC)
+	public void getStationList(MessageStationList ss){
+		if (ss.getMessageCode() == MessageEvent.RequestStation){
+			Log.i("收到电站请求信息", "1233455");
+			StationList_interface getStation = theRetrofit().create(StationList_interface.class);
+			Call<StationList> call = getStation.getCall(ANDROID);
+			call.enqueue(new Callback<StationList>() {
+				@Override
+				public void onResponse(Call<StationList> call, Response<StationList> response) {
+					try {
+						if (response.code() == 200) {
+							if (response.body().getStatus() == 0) {
+								Log.i("电站信息：",response.body().getStatus()+"///"+response.body().getMsg());
+								EventBus.getDefault().post(new MessageStationList(response.body()));
+							} else {
+								switch (response.body().getStatus()) {
+								}
+								Toast.makeText(getApplicationContext(), "错误代码为" + response.body().getStatus(), Toast.LENGTH_SHORT).show();
+							}
+						} else
+							Toast.makeText(getApplicationContext(), "服务器返回错误类型为" + response.code(), Toast.LENGTH_SHORT).show();
+					} catch (Exception e) {
+						e.printStackTrace();
+						Toast.makeText(getApplicationContext(), "错误代码为" + e, Toast.LENGTH_SHORT).show();
+					}
+				}
+
+				@Override
+				public void onFailure(Call<StationList> call, Throwable t) {
+					Log.i("错误信息:", t.toString());
+					Toast.makeText(getApplicationContext(), "错误代码为" + t, Toast.LENGTH_SHORT).show();
+				}
+			});
+		}
+
 	}
 
 

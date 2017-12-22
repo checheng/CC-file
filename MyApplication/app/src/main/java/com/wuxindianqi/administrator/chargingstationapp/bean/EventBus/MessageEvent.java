@@ -38,6 +38,9 @@ public class MessageEvent {
 	public static final int AnswerBalance = 104409;
 	public static final int RequestForget  = 104510;
 	public static final int AnswerForget = 104410;
+	public static final int RequestStation = 104511;
+	public static final int AnswerStation = 104411;
+
 
 
 	public int getMessageCode() {

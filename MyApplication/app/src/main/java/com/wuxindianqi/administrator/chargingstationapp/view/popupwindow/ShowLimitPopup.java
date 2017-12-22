@@ -17,12 +17,12 @@ import razerdp.basepopup.BasePopupWindow;
  * Created by Administrator on 2017/11/30.
  */
 
-public class DialogPopup extends BasePopupWindow implements View.OnClickListener {
+public class ShowLimitPopup extends BasePopupWindow implements View.OnClickListener {
 
 	private Switch freeSW,DCSW,ACSW;
 	private Button allBTN;
 
-	public DialogPopup(Context context) {
+	public ShowLimitPopup(Context context) {
 		super(context);
 		initView();
 	}
@@ -57,7 +57,7 @@ public class DialogPopup extends BasePopupWindow implements View.OnClickListener
 
 	@Override
 	public View onCreatePopupView() {
-		return createPopupById(R.layout.popupwindow_xianshi);
+		return createPopupById(R.layout.popupwindow_show);
 	}
 
 	@Override

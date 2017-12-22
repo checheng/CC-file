@@ -15,6 +15,10 @@ public class LatlngDistanceMethod {
 		distance = gettheDistance(latLng1.getLongitude(),latLng1.getLatitude(),latLng2.getLongitude(),latLng2.getLatitude());
 	}
 
+	public LatlngDistanceMethod(double localLan,double localLon,double destinationLan,double destinationLon) {
+		distance = gettheDistance(localLon,localLan,destinationLon,destinationLan);
+	}
+
 	public double getDistance() {
 		return distance;
 	}

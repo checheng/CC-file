@@ -1,7 +1,5 @@
 package com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond;
 
-import com.wuxindianqi.administrator.chargingstationapp.bean.UserInfo;
-
 /**
  * Created by Administrator on 2017/11/9.
  */

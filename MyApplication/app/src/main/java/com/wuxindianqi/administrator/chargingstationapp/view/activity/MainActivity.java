@@ -10,8 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.wuxindianqi.administrator.chargingstationapp.MyService;
 import com.wuxindianqi.administrator.chargingstationapp.R;
+import com.wuxindianqi.administrator.chargingstationapp.bean.EventBus.MessageStationList;
 import com.wuxindianqi.administrator.chargingstationapp.bean.RequestANDRespond.ApiToken;
 import com.wuxindianqi.administrator.chargingstationapp.bean.EventBus.MessageEvent;
 import com.wuxindianqi.administrator.chargingstationapp.bean.EventBus.MessageLogin;
@@ -64,6 +69,7 @@ public class MainActivity extends ExitApplicationActivity implements View.OnClic
 				@Override
 				public void run() {
 					EventBus.getDefault().post(new MessageEvent(MessageEvent.RequestAPIKEY, new ApiToken(API_KEY)));
+					EventBus.getDefault().post(new MessageStationList());
 				}
 			}, 100);
 		}
@@ -93,6 +99,7 @@ public class MainActivity extends ExitApplicationActivity implements View.OnClic
 
 	@Override
 	protected void onResume() {
+
 		//登陆成功后返回到我的信息页
 		int id = getIntent().getIntExtra("SignIn", 0);
 //		Log.i("反馈队列ID", "" + id);
@@ -100,10 +107,16 @@ public class MainActivity extends ExitApplicationActivity implements View.OnClic
 			replaceFragment(mUserLoginFragment);
 //			Toast.makeText(this,"登陆成功",Toast.LENGTH_SHORT).show();
 		}
-		if (id== 1){
+		if (id == 1) {
 			replaceFragment(mUserLogoutFragment);
 		}
 		super.onResume();
+
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
 	}
 
 	@Override
@@ -121,6 +134,15 @@ public class MainActivity extends ExitApplicationActivity implements View.OnClic
 	public void onRequest(MessageEvent messageEvent) {
 		if (messageEvent.getMessageCode()==MessageEvent.AnswerSignIn){
 			Log.i("信息","收到反馈登录");
+		}
+	}
+
+	//收到的电站站列表
+	@Subscribe(threadMode = ThreadMode.MAIN)
+	public void getBack(MessageStationList ss) {
+		if (ss.getMessageCode() == MessageEvent.AnswerStation) {
+			Log.i("收到电站信息", ss.getMessageCode()+"");
+			mMapFragment.setStationList(ss.getStationList());
 		}
 	}
 
@@ -177,7 +199,10 @@ public class MainActivity extends ExitApplicationActivity implements View.OnClic
 
 
 
-	public OkHttpClient OkHttpC(){
+
+
+
+/*	public OkHttpClient OkHttpC(){
 
 		OkHttpClient.Builder builder = new OkHttpClient.Builder().cookieJar(new CookieManger(this));
 
@@ -186,6 +211,6 @@ public class MainActivity extends ExitApplicationActivity implements View.OnClic
 				.connectTimeout(5000, TimeUnit.SECONDS)
 				.build();
 		return okHttpClient;
-	}
+	}*/
 
 }
